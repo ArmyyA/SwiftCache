@@ -18,6 +18,9 @@ public class CacheServer {
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("Accepted connection from " + clientSocket.getInetAddress());
 
+                ClientHandler clientHandler = new ClientHandler(clientSocket);
+                clientHandler.start();
+
             }
         } catch (IOException e) {
             e.printStackTrace();

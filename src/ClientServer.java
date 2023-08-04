@@ -1,8 +1,5 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
+import java.io.*;
+import java.net.*;
 import java.util.Scanner;
 
 public class ClientServer {
@@ -10,7 +7,6 @@ public class ClientServer {
         String serverAddress = "localhost";
         int serverPort = 161;
 
-        // Create socket for client and ping server address
         try (Socket socket = new Socket(serverAddress, serverPort);
                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
@@ -20,7 +16,7 @@ public class ClientServer {
                 System.out.println("Select an action:");
                 System.out.println("1. Put");
                 System.out.println("2. Get");
-                System.out.println("0. Exit");
+                System.out.println("3. Exit");
                 int choice = scanner.nextInt();
                 scanner.nextLine(); // Consume newline
 
@@ -43,7 +39,7 @@ public class ClientServer {
                         break;
                     case 3:
                         out.println("exit");
-                        return;
+                        return; // Exit the loop and close the connection
                     default:
                         System.out.println("Invalid choice. Try again.");
                 }
